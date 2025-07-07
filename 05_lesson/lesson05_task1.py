@@ -9,11 +9,9 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get("http://uitestingplayground.com/classattr")
 driver.find_element(
     By.XPATH,
-    (
-        "//button[contains(concat(' ', normalize-space(@class), ' '), "
-        "' btn-primary ')]"
-    )
+    "//button[contains(concat(' ', normalize-space(@class), ' '), ' btn-primary ')]"
 ).click()
+
 sleep(10)
 
-# driver.quit()
+driver.quit()
