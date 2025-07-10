@@ -15,9 +15,4 @@ picture = WebDriverWait(driver, 25).until(
         EC.presence_of_element_located((By.ID, "award")))
 print(picture.get_attribute("src"))
 
-blue_button = driver.find_element(By.ID, "updatingButton")
-blue_button.click()
-text = blue_button.text
-print(text)
-
 driver.quit()
