@@ -29,22 +29,28 @@ def test_checkout_total_price(browser):
     login_page.login("standard_user", "secret_sauce")
 
     # 2. Добавление товаров
-    products = [
+    products_names = [
         "Sauce Labs Backpack",
         "Sauce Labs Bolt T-Shirt",
         "Sauce Labs Onesie"
     ]
     for product in products:
         products_page.add_product_to_cart(product)
+    
+    # 4. Проверка количества товаров в корзине
+    cart_badge = products_page.get_cart_items_count()
+    assert cart_badge == str(len(products)), (
+        f"Ожидалось {len(products)} товаров в корзине, найдено {cart_badge}"
+    )
 
-    # 3. Переход в корзину и оформление
+    # 5. Переход в корзину и оформление
     products_page.go_to_cart()
     cart_page.proceed_to_checkout()
 
-    # 4. Заполнение данных
+    # 6. Заполнение данных
     checkout_page.fill_checkout_info("Юлия", "Павловская", "194363")
 
-    # 5. Проверка суммы
+    # 7. Проверка суммы
     total = checkout_page.get_total_amount()
     assert "Total: $58.29" in total, (
         f"Ожидалось 'Total: $58.29', получено '{total}'"
